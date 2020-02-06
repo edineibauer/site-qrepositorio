@@ -1,7 +1,7 @@
 $(function () {
     getTemplates().then(tpl => {
 
-        $('.r-index').append(Mustache.render(tpl.viewIndex, {home: HOME}));
+        $('.r-login').append(Mustache.render(tpl.viewIndex, {home: HOME}));
 
         $('body').on('click', function (e) {
             $('#wrapper.toggled').removeClass('toggled')
