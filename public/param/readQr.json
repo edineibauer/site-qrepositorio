@@ -1,0 +1,8 @@
+{
+    "title": "{$sitename}",
+    "css": ["w3"],
+    "js": [
+        "libs/qrcodelib",
+        "libs/webcodecamjs"
+    ]
+}

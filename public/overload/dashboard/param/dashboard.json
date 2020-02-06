@@ -1,0 +1,6 @@
+{
+  "title": "Dashboard",
+  "js": ["funcaoDashboard", "libs/qrcode.min"],
+  "css": ["w3"],
+  "!setor": "0"
+}

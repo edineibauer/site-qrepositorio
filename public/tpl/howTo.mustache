@@ -1,0 +1,90 @@
+<div class="col padding-xlarge color-white border-bottom color-text-gray">
+    <h1 class="container-1200 col theme-text font-xlarge font-bold">
+        {{nome}}
+    </h1>
+    <p class="container-1200 col">
+        {{descricao}}
+    </p>
+</div>
+<div class="col padding-medium padding-24">
+    <div class="container-1200 col">
+        {{#ativo}}
+            {{#anexos}}
+                {{> howToCard}}
+            {{/anexos}}
+        {{/ativo}}
+        {{^ativo}}
+            <h3 class="align-center text-center theme-text font-bold"><i class="material-icons font-xxxlarge">sentiment_very_dissatisfied</i>
+                <div class="col">Opss! Repositório Desativado</div>
+            </h3>
+        {{/ativo}}
+    </div>
+</div>
+
+<div id="modalHowTo" class="col">
+    <button class="btn btn-flat radius-circle closeModal"><i class="material-icons">close</i></button>
+    <div class="container-1200">
+        <div class="col card radius modalHowToCard">
+            <h1 class="col padding-xlarge s-font-xlarge font-bold color-text-gray" id="modalTitle"></h1>
+            <div class="col" id="modalContent"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .preview, .preview > svg {
+        width: 100%;
+        min-height: 140px;
+    }
+
+    .preview > video {
+        display: block;
+        width: 100%;
+    }
+
+    .preview > img {
+        max-height: 140px;
+        padding-top: 20px;
+        display: block;
+        margin: auto;
+        float: initial !important;
+    }
+
+    .preview > svg {
+        padding-top: 20px !important;
+    }
+
+    .card-repositorio {
+        overflow: hidden;
+    }
+
+    .card-repositorio .title {
+        padding: 2px 0 0 2px;
+        width: calc(100% - 27px);
+        text-align: left;
+        overflow: hidden;
+    }
+
+    .card-repositorio > h2 {
+        height: 53px;
+        overflow: hidden;
+        width: 300px !important;
+    }
+
+    .title-icon {
+        padding-right: 7px;
+    }
+
+    .title-icon .svgIcon {
+        padding: 2px 0 4px 0;
+    }
+
+    .title-icon > img {
+        width: 21px;
+        padding: 3px 0 0;
+        height: 24px;
+    }
+
+</style>
+
+{{> svgFiles}}

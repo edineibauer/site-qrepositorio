@@ -1,0 +1,29 @@
+<div class="col s12 m4 l2 padding-small">
+    {{#isDownload}}
+        <a href="{{url}}" download="{{nome}}.{{type}}" target="_blank" alt="{{nome}}"
+           class="col radius card card-repositorio pointer padding-0">
+            <div class="col preview">
+                {{{preview}}}
+            </div>
+            <h2 class="col font-large padding-small padding-12">
+                <div class="left title color-text-gray-dark">
+                    <div class="left title-icon"><i class="material-icons" style="margin: 2px 0;">get_app</i></div>
+                    {{nome}}
+                </div>
+            </h2>
+        </a>
+    {{/isDownload}}
+    {{^isDownload}}
+        <div data-id="{{id}}" data-type="{{isType}}" data-name="{{name}}" class="modal-open col radius card card-repositorio pointer padding-0">
+            <div class="col preview">
+                {{{preview}}}
+            </div>
+            <h2 class="col font-large padding-small padding-12">
+                <div class="left title color-text-gray-dark">
+                    <div class="left title-icon"><i class="material-icons" style="margin: 2px 0;font-size: 22px">open_with</i></div>
+                    {{nome}}
+                </div>
+            </h2>
+        </div>
+    {{/isDownload}}
+</div>
