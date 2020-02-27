@@ -104,11 +104,11 @@ body {
 
 .logo {
     margin: 0 auto;
-    padding: 40px 20px 15px
+    padding: 40px 10px 15px
 }
 
 .logo figure img {
-    max-height: 70px;
+    max-height: 60px;
     height: auto;
 }
 
@@ -160,7 +160,7 @@ input {
 }
 
 .owl-item .card-body {
-    height: 372px;
+    height: 290px;
 }
 
 .form-group {
@@ -185,6 +185,7 @@ input {
     font-weight: 700 !important;
     color: #343434;
     display: inline;
+    opacity: 1;
 }
 
 .botao-principal {
@@ -195,6 +196,14 @@ input {
     font-size: 24px !important;
     font-family: 'Roboto', sans-serif !important;
     width: 100% !important
+}
+
+#camera-select {
+    position: fixed;
+    bottom: 10px;
+    left: 2%;
+    width: 96%;
+    z-index: 99;
 }
 
 .linha-cinza::before {
@@ -209,6 +218,10 @@ input {
     margin: 4px auto 20px;
     border-radius: 4px;
     visibility: visible;
+}
+
+#inicio {
+    padding-bottom: 20px;
 }
 
 #inicio .tit {
@@ -288,12 +301,14 @@ input {
 }
 
 #inicio .botoes {
-    margin-top: 70px;
-    padding-bottom: 0
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
 }
 
 #inicio .btn-success {
-    font-size: 26px !important;
+    font-size: 18px !important;
+    padding: 12px 0;
     font-weight: 500 !important;
     font-family: 'Roboto', sans-serif !important;
     width: 100% !important;
@@ -301,9 +316,18 @@ input {
     border-color: #ffffff;
 }
 
+#abrir-menu:focus {
+    box-shadow: none!important;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(98, 186, 178, 0.36);
+}
+
 #inicio .btn-outline-success {
     width: 100%;
-    font-size: 26px;
+    font-size: 18px;
+    padding: 12px 0;
     color: #fff;
     border-color: #fff;
     font-weight: 500;

@@ -211,6 +211,14 @@ input {
     visibility: visible;
 }
 
+#camera-select {
+    position: fixed;
+    bottom: 10px;
+    left: 2%;
+    width: 96%;
+    z-index: 99;
+}
+
 #inicio .tit {
     text-align: center;
     font-size: 17px;
@@ -293,7 +301,7 @@ input {
 }
 
 #inicio .btn-success {
-    font-size: 26px !important;
+    font-size: 18px !important;
     font-weight: 500 !important;
     font-family: 'Roboto', sans-serif !important;
     width: 100% !important;
@@ -301,9 +309,13 @@ input {
     border-color: #ffffff;
 }
 
+#abrir-menu:focus {
+    box-shadow: none!important;
+}
+
 #inicio .btn-outline-success {
     width: 100%;
-    font-size: 26px;
+    font-size: 18px;
     color: #fff;
     border-color: #fff;
     font-weight: 500;

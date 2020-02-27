@@ -1,8 +1,8 @@
 <div class="col padding-xlarge color-white border-bottom color-text-gray">
-    <h1 class="container-1200 col theme-text font-xlarge font-bold">
+    <h1 class="container-1200 col theme-text padding-12 font-xlarge font-bold">
         {{nome}}
     </h1>
-    <p class="container-1200 col">
+    <p class="container-1200 col margin-0">
         {{descricao}}
     </p>
 </div>
@@ -22,10 +22,13 @@
 </div>
 
 <div id="modalHowTo" class="col">
-    <button class="btn btn-flat radius-circle closeModal"><i class="material-icons">close</i></button>
     <div class="container-1200">
-        <div class="col card radius modalHowToCard">
-            <h1 class="col padding-xlarge s-font-xlarge font-bold color-text-gray" id="modalTitle"></h1>
+        <div class="col modalHowToCard">
+            <h1 class="col padding-0 font-large font-bold color-text-gray">
+                <button class="closeModal"><i class="material-icons">arrow_back</i></button>
+                <div class="left" id="modalTitle"></div>
+                <a target="_blank" download class="downloadModal"><i class="material-icons">get_app</i></a>
+            </h1>
             <div class="col" id="modalContent"></div>
         </div>
     </div>
@@ -66,7 +69,7 @@
     }
 
     .card-repositorio > h2 {
-        height: 53px;
+        height: 43px;
         overflow: hidden;
         width: 300px !important;
     }

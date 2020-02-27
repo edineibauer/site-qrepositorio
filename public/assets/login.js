@@ -1,7 +1,7 @@
 $(function () {
     getTemplates().then(tpl => {
 
-        $('.r-login').append(Mustache.render(tpl.viewIndex, {home: HOME}));
+        $('.r-login').append(Mustache.render(tpl.viewIndex, {home: HOME, vendor: VENDOR, sitename: SITENAME}));
 
         $('body').on('click', function (e) {
             $('#wrapper.toggled').removeClass('toggled')
@@ -102,7 +102,7 @@ $(function () {
                 } else {
                     toast("Olá " + g.nome + "!", 3000, "toast-success");
                     setCookieUser(g).then(() => {
-                        pageTransition("dashboard", "route", "forward", "#core-content", null, null, !1);
+                        location.href = HOME + "dashboard";
                     })
                 }
             })
@@ -123,7 +123,7 @@ $(function () {
         /** QR CODE */
         var webQr = new WebCodeCamJS("canvas");
         let width = window.innerWidth < 900 ? window.innerWidth : 900;
-        $("#webcodecam-canvas").css({"width": width + "px", "height": width * 0.77 + "px"});
+        $("#webcodecam-canvas").css({"width": width + "px", "height": width + "px"});
 
         /* -------------------------------------- Available parameters --------------------------------------*/
         var options = {
@@ -159,12 +159,8 @@ $(function () {
             threshold: 0,                           // int
             sharpness: [],      // to On declare matrix, example for sharpness ->  [0, -1, 0, -1, 5, -1, 0, -1, 0]
             resultFunction: function (result) {
-                closeQrCode();
-                $('#abrir-menu').trigger("click");
-                $("#qrcodeInput").val(result.code);
-                openCadastro();
-
                 webQr.stop();
+                pageTransition(result.code, "route", "forward");
             },
             cameraSuccess: function (stream) {           //callback funtion to camera success
                 $("#qrcode-block-opacity-0").css("opacity", 0);
@@ -230,7 +226,7 @@ $(function () {
         });
 
         $("#open-qr").off("click").on("click", function () {
-            webQr.init(options).play();
+            webQr.buildSelectMenu('#camera-select', ($("#camera-select option").length > 1 ? 'environment|back' : 'user|front')).init(options).play();
             $("#qrcode-div").css("display", "block");
             setTimeout(function () {
                 $("#qrcode-actions .btn").css("transform", "translateY(0)");
@@ -264,11 +260,13 @@ $(function () {
                     $("#senhaInput").focus();
                 } else {
                     $(".form-cadastro").loading();
-                    db.exeCreate("usuario", user).then(userReturn => {
+                    db.exeCreate("clientes", user).then(userReturn => {
                         if (userReturn && typeof userReturn === "object" && userReturn.db_errorback === 0 && typeof userReturn.db_action === "string" && userReturn.db_action === "create") {
                             $("#modal-content-cadastro-sucesso").loading();
                             $("#cadastro-sucedido").trigger("click");
-                            exeLogin(user.email, user.senha);
+                            setTimeout(function () {
+                                exeLogin(user.email, user.senha);
+                            }, 1000);
                         } else if (userReturn.db_errorback === 1) {
                             for (let i in userReturn) {
                                 if (i !== "db_errorback") {
@@ -300,7 +298,7 @@ $(function () {
             }
         });
 
-        $("#senha").off("keydown").on("keydown", function (e) {
+        $("#senha, #email").off("keydown").on("keydown", function (e) {
             if (e.keyCode === 13)
                 $("#botao-principal-login").trigger("click");
         });
@@ -325,71 +323,73 @@ window.SwipeMenu = {
 };
 
 function swipeMenuEvent($menu) {
-    let height = $menu.height();
-    $menu.swipe({
-        swipe: function (event, direction, distance, duration, fingerCount, fingerData, currentDirection) {
-            if (!$menu.hasClass('open'))
-                return;
+    if (window.innerWidth < 900) {
+        let height = $menu.height();
+        $menu.swipe({
+            swipe: function (event, direction, distance, duration, fingerCount, fingerData, currentDirection) {
+                if (!$menu.hasClass('open') || typeof event.targetTouches === "undefined")
+                    return;
 
-            if ($(".form-control").is(":focus"))
-                $(".form-control").blur();
+                if ($(".form-control").is(":focus"))
+                    $(".form-control").blur();
 
-            if (direction == 'start')
-                $menu.removeClass('close').addClass('moving');
+                if (direction == 'start')
+                    $menu.removeClass('close').addClass('moving');
 
-            if (direction == 'move') {
-                if (direction == 'down') {
-                    $menu.css({bottom: -Math.abs(distance)})
-                } else {
+                if (direction == 'move') {
+                    if (direction == 'down') {
+                        $menu.css({bottom: -Math.abs(distance)})
+                    } else {
+                        if (direction == 'up') {
+                            $menu.css({bottom: Math.abs(distance)})
+                        }
+                    }
+                }
+                if ((direction == 'end' || direction == 'cancel')) {
+                    if (direction == 'down') {
+                        var bottomStatus = $menu.css('bottom').replace(/[^-\d\.]/g, '');
+                        if ((Math.abs(parseInt(bottomStatus))) > height / 2) {
+                            $menu.removeClass('moving open').addClass('close')
+                        } else {
+                            $menu.removeClass('moving close').addClass('open')
+                        }
+                        $menu.css({bottom: ''})
+                    } else {
+                        $menu.css({bottom: 0})
+                    }
+                }
+            }, swipeStatus: function (event, phase, direction, distance) {
+                if (!$menu.hasClass('open') || typeof event.targetTouches === "undefined" || (event.targetTouches.length === 1 && !$(event.targetTouches[0].target).hasClass("tit")))
+                    return;
+
+                if (event.targetTouches.length === 1 && !$(event.targetTouches[0].target).hasClass("form-control") && $(".form-control").is(":focus"))
+                    $(".form-control").blur();
+
+                if (phase == 'start')
+                    $menu.removeClass('close').addClass('moving');
+
+                if (phase == 'move') {
                     if (direction == 'up') {
-                        $menu.css({bottom: Math.abs(distance)})
-                    }
-                }
-            }
-            if ((direction == 'end' || direction == 'cancel')) {
-                if (direction == 'down') {
-                    var bottomStatus = $menu.css('bottom').replace(/[^-\d\.]/g, '');
-                    if ((Math.abs(parseInt(bottomStatus))) > height / 2) {
-                        $menu.removeClass('moving open').addClass('close')
+                        let up = Math.abs(distance);
+                        $menu.css({bottom: up > 100 ? 100 : up})
                     } else {
-                        $menu.removeClass('moving close').addClass('open')
+                        $menu.css({bottom: -Math.abs(distance)})
                     }
-                    $menu.css({bottom: ''})
-                } else {
-                    $menu.css({bottom: 0})
                 }
-            }
-        }, swipeStatus: function (event, phase, direction, distance) {
-            if (!$menu.hasClass('open') || (event.targetTouches.length === 1 && !$(event.targetTouches[0].target).hasClass("tit")))
-                return;
-
-            if (event.targetTouches.length === 1 && !$(event.targetTouches[0].target).hasClass("form-control") && $(".form-control").is(":focus"))
-                $(".form-control").blur();
-
-            if (phase == 'start')
-                $menu.removeClass('close').addClass('moving');
-
-            if (phase == 'move') {
-                if (direction == 'up') {
-                    let up = Math.abs(distance);
-                    $menu.css({bottom: up > 100 ? 100 : up})
-                } else {
-                    $menu.css({bottom: -Math.abs(distance)})
-                }
-            }
-            if ((phase == 'end' || phase == 'cancel')) {
-                if (direction == 'down') {
-                    var bottomStatus = $menu.css('bottom').replace(/[^-\d\.]/g, '');
-                    if ((Math.abs(parseInt(bottomStatus))) > height / 2) {
-                        $menu.removeClass('moving open').addClass('close')
+                if ((phase == 'end' || phase == 'cancel')) {
+                    if (direction == 'down') {
+                        var bottomStatus = $menu.css('bottom').replace(/[^-\d\.]/g, '');
+                        if ((Math.abs(parseInt(bottomStatus))) > height / 2) {
+                            $menu.removeClass('moving open').addClass('close')
+                        } else {
+                            $menu.removeClass('moving close').addClass('open')
+                        }
+                        $menu.css({bottom: ''})
                     } else {
-                        $menu.removeClass('moving close').addClass('open')
+                        $menu.css({bottom: 0})
                     }
-                    $menu.css({bottom: ''})
-                } else {
-                    $menu.css({bottom: 0})
                 }
             }
-        }
-    })
+        })
+    }
 }

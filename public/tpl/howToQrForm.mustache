@@ -1,14 +1,29 @@
-<div class="right padding-8">
-    <a href="{{home}}howto/{{id}}" target="_blank" class="btn theme color-text-white padding-medium margin-0" style="width: 150px; font-size: 15px">acessar conteúdo</a>
+<div class="right s-padding-0 s-margin-right" style="padding-top:30px; width: 150px">
+    <a href="{{home}}howto/{{id}}" title="" class="btn theme color-text-white padding-medium margin-0 btnaccess">
+        acessar conteúdo
+    </a>
+    <a href="{{home}}howto/{{id}}" target="_blank" title="" download="qrcode_{{id}}.png" class="btn theme-border theme-text padding-medium btnqr">baixar QR Code</a>
 </div>
 <style>
-    #previewQrRepositorio {
-        max-width: 200px;
-    }
     #previewQrRepositorio img {
-        float:right;
+        float: right;
     }
+
     textarea.formCrudInput {
         min-height: 134px;
+    }
+
+    .btnaccess {
+        width: 150px;
+        font-size: 15px
+    }
+
+    .btnqr {
+        margin: 5px 0 0;
+        border-style: solid!important;
+        border-width: 1px!important;
+        background: #fff!important;
+        width: 150px;
+        font-size: 15px
     }
 </style>

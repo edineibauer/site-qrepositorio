@@ -8,7 +8,7 @@ $(function () {
         /** QR CODE */
         var webQr = new WebCodeCamJS("canvas");
         let width = window.innerWidth < 900 ? window.innerWidth : 900;
-        $("#webcodecam-canvas").css({"width": width + "px", "height": width * 0.77 + "px"});
+        $("#webcodecam-canvas").css({"width": width + "px", "height": width + "px"});
 
         /* -------------------------------------- Available parameters --------------------------------------*/
         var options = {
