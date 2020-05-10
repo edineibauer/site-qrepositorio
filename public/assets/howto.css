@@ -1,3 +1,7 @@
+body {
+    background: #EEEEEE;
+}
+
 #modalHowTo {
     display: none;
     position: fixed;

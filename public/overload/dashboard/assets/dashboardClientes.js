@@ -75,24 +75,7 @@ function dashboardSidebarInfo() {
     }
 
     $("#dashboard-sidebar-nome").html(USER.nome);
-    let $sidebar = $("#core-sidebar-edit");
-    $sidebar.removeClass("hide").off("click").on("click", function () {
-        if (document.querySelector(".btn-edit-perfil") !== null) {
-            document.querySelector(".btn-edit-perfil").click()
-        } else {
-            mainLoading();
-            app.loadView(HOME + "dashboard");
-            toast("carregando perfil...", 1300, "toast-success");
-            let ee = setInterval(function () {
-                if (document.querySelector(".btn-edit-perfil") !== null) {
-                    setTimeout(function () {
-                        document.querySelector(".btn-edit-perfil").click()
-                    }, 1000);
-                    clearInterval(ee)
-                }
-            }, 100)
-        }
-    })
+    $("#core-sidebar-edit").remove();
 }
 
 function closeNote(id) {
@@ -101,7 +84,7 @@ function closeNote(id) {
 }
 
 function dashboardPanelContent() {
-    return dbLocal.exeRead('historico').then(historicos => {
+    return db.exeRead('historico').then(historicos => {
         historicos = historicos.reverse();
         historicos = historicos.slice(0, 8);
         return getTemplates().then(tpl => {

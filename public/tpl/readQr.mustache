@@ -1,6 +1,17 @@
 <div class="col p-0" id="qrcode-div">
+    <div class="col p-0 theme overflow-hidden" id="qrcode-header">
+        <div class="float-left p-3" id="close-qr">
+            <h4 class="material-icons">close</h4>
+        </div>
+        <h4 class="text-center p-3">
+            QR Code
+        </h4>
+    </div>
     <div class="col p-0 overflow-hidden" id="qrcode-center">
-        <h3 class="font-bold padding-16" style="text-align: center; color: #cccccc">Aponte a câmera para o QR Code</h3>
+        <div id="qrcode-block-opacity-header">Aponte a câmera para o QR Code</div>
     </div>
     <canvas width="320" height="320" id="webcodecam-canvas"></canvas>
+    <div class="col padding-medium" id="qrcode-actions">
+        <select class="hide" id="camera-select"></select>
+    </div>
 </div>

@@ -17,7 +17,7 @@
   {
     "funcao": "toggleSidebar",
     "li": {
-        "class": "not-menu-li"
+      "class": "not-menu-li"
     },
     "html": "<div id='core-header-perfil'></div>"
   }

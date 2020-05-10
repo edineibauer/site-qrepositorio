@@ -1,6 +1,6 @@
 {
   "title": "Dashboard",
-  "js": ["dashboardClientes", "libs/qrcode.min"],
+  "js": ["reportRead","dashboardClientes", "appCoreDashboard", "libs/qrcode.min"],
   "css": ["w3"],
   "!setor": "0",
   "navbar": false

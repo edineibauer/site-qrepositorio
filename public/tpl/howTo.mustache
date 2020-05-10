@@ -1,18 +1,22 @@
-<div class="col padding-xlarge color-white border-bottom color-text-gray">
-    <h1 class="container-1200 col theme-text padding-12 font-xlarge font-bold">
-        {{nome}}
-    </h1>
-    <p class="container-1200 col margin-0">
-        {{descricao}}
-    </p>
-</div>
+{{^one}}
+    <div class="col padding-xlarge color-white border-bottom color-text-gray">
+        <h1 class="container-1200 col color-text-gray-dark padding-12 font-xlarge font-bold">
+            {{titulo}}
+        </h1>
+        <p class="container-1200 col margin-0">
+            {{descricao}}
+        </p>
+    </div>
+{{/one}}
 <div class="col padding-medium padding-24">
     <div class="container-1200 col">
-        {{#ativo}}
-            {{#anexos}}
-                {{> howToCard}}
-            {{/anexos}}
-        {{/ativo}}
+        {{^one}}
+            {{#ativo}}
+                {{#anexos}}
+                    {{> howToCard}}
+                {{/anexos}}
+            {{/ativo}}
+        {{/one}}
         {{^ativo}}
             <h3 class="align-center text-center theme-text font-bold"><i class="material-icons font-xxxlarge">sentiment_very_dissatisfied</i>
                 <div class="col">Opss! Repositório Desativado</div>

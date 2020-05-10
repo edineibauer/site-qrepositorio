@@ -1,7 +1,7 @@
 {
   "title": "How to Make",
-  "js": [],
-  "css": [],
+  "js": ["base"],
+  "css": ["base"],
   "font": [
     "roboto"
   ],

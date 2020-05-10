@@ -260,11 +260,13 @@ $(function () {
                     $("#senhaInput").focus();
                 } else {
                     $(".form-cadastro").loading();
-                    db.exeCreate("empresas", user).then(userReturn => {
+                    db.exeCreate("clientes", user).then(userReturn => {
                         if (userReturn && typeof userReturn === "object" && userReturn.db_errorback === 0 && typeof userReturn.db_action === "string" && userReturn.db_action === "create") {
                             $("#modal-content-cadastro-sucesso").loading();
                             $("#cadastro-sucedido").trigger("click");
-                            exeLogin(user.email, user.senha);
+                            setTimeout(function () {
+                                exeLogin(user.email, user.senha);
+                            }, 1000);
                         } else if (userReturn.db_errorback === 1) {
                             for (let i in userReturn) {
                                 if (i !== "db_errorback") {
@@ -296,7 +298,7 @@ $(function () {
             }
         });
 
-        $("#senha").off("keydown").on("keydown", function (e) {
+        $("#senha, #email").off("keydown").on("keydown", function (e) {
             if (e.keyCode === 13)
                 $("#botao-principal-login").trigger("click");
         });
@@ -321,7 +323,7 @@ window.SwipeMenu = {
 };
 
 function swipeMenuEvent($menu) {
-    if(window.innerWidth < 900) {
+    if (window.innerWidth < 900) {
         let height = $menu.height();
         $menu.swipe({
             swipe: function (event, direction, distance, duration, fingerCount, fingerData, currentDirection) {
@@ -360,7 +362,7 @@ function swipeMenuEvent($menu) {
                 if (!$menu.hasClass('open') || typeof event.targetTouches === "undefined" || (event.targetTouches.length === 1 && !$(event.targetTouches[0].target).hasClass("tit")))
                     return;
 
-                if (typeof event.targetTouches !== "undefined" && event.targetTouches.length === 1 && !$(event.targetTouches[0].target).hasClass("form-control") && $(".form-control").is(":focus"))
+                if (event.targetTouches.length === 1 && !$(event.targetTouches[0].target).hasClass("form-control") && $(".form-control").is(":focus"))
                     $(".form-control").blur();
 
                 if (phase == 'start')
@@ -388,6 +390,6 @@ function swipeMenuEvent($menu) {
                     }
                 }
             }
-        });
+        })
     }
 }

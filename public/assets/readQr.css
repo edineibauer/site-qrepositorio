@@ -1,14 +1,86 @@
-#webcodecam-canvas {
-    margin: 89px auto 0;
-    display: block;
+body {
+    background: #2a2a2a;
 }
 
 #qrcode-div {
-    background: #333333;
-    padding-top: 90px;
     position: fixed;
-    top:0;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 1;
+    display: none;
+    background: #666666;
+}
+
+#qrcode-center {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+#cadastre , #entrar {
+    cursor: pointer;
+}
+
+#qrcode-block-opacity-header {
+    position: fixed;
+    top: 110px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: #ffffff;
+    z-index: 4;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: all ease .4s;
+    opacity: 0;
+}
+
+#qrcode-header {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 60px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    z-index: 3;
+    transform: translateY(-60px);
+    transition: all ease .8s;
+}
+
+#close-qr {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#webcodecam-canvas {
+    margin-top: -5px;
+    margin-left: -75px;
+}
+
+#qrcode-header > h4 {
+    font-weight: 300;
+}
+
+#qrcode-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 130px;
+    z-index: 3;
+}
+
+#qrcode-actions .btn {
+    margin: auto;
+    float: initial;
+    display: block;
+    transform: translateY(60px);
+    transition: all ease .8s;
 }
