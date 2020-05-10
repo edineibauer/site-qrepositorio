@@ -126,9 +126,10 @@ $(function () {
         threshold: 0,                           // int
         sharpness: [],      // to On declare matrix, example for sharpness ->  [0, -1, 0, -1, 5, -1, 0, -1, 0]
         resultFunction: function (result) {
+            let t = result.code.split("/");
             closeQrCode();
             webQr.stop();
-            pageTransition(result.code.replace(HOME, ""));
+            pageTransition(t[3] + "/" + t[4]);
         },
         cameraSuccess: function (stream) {           //callback funtion to camera success
             $("#qrcode-block-opacity-0").css("opacity", 0);
